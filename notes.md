@@ -258,3 +258,13 @@ Effective chunking:
 - Correcting typos, removing any repeated text and standardizing text formatting helps ensure your data is in its best form. 
 
 To chunk the text we can use library called 'langchain' which is commonly used for splitting text. One of those is called CharacterTextSplitter which splits based on specific characters and measures chunk length.
+
+import { CharacterTextSplitter } from "langchain/text_splitter";
+
+// LangChain text splitter
+async function splitDocument() {
+  const response = await fetch("long-podcasts.txt");
+  const text = await response.text();
+  console.log(text);
+}
+splitDocument();
