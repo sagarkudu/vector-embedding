@@ -1,0 +1,76 @@
+- Spotify starts experimenting with transforming songs, artists and historical usage data into 'numerical vectors.'
+
+These vectors capture the essense of the data going beyond genre labels or keywords. 
+e.g "Happy" -> 0.09234242, 0.01987486, 0.05252523532, 0.0822522222...-> Joyful, Upbeat
+e.g "All of me" -> 0.2324242, 0.025987486, 0.0252252523532, 0.9822522222...-> Wedding, Soulful
+
+- Spotify revolutionalize its recommendation system with a process known as vector embeddings.
+
+- Embeddings are building blocks of many machine learning and AI algorithms. If you need to buidling AI apps you need to learn embeddings and working with vector databases.
+
+- What to expect:
+ - Embeddings basics (use and its understanding)
+ - create embeddings with Open AI API (Turn words, phrases into meaningful vector presentations)
+ - Intro to vector databases.
+ - setup and use vector database. (store embeddings)
+ - AI driven search and conversations. (learn how AI powered chatbot and apps actually think, and replying like humans )
+ - AI development framework LangChain (text splitting or chunking a crucial step in preparing text for vector embeddings)
+ 
+
+ Q. What are embeddings?
+
+ - when you present a question to AI, it first needs to translate it and format it so it can understand.
+ So you can think embeddings as a language that AI understands.
+
+ - The term embedding is a mathematical concept that refers to placing one object into a different space.
+ Think of like taking a word or sentence which is a content space and transforming it into different representation like a set of numbers in a vector space, all while preserving its original message and the relationships between other words and phrases. 
+ e.g "Hello world" -> 0.22234242, 0.436987486, 0.63252523532, 0.0345435322
+
+ - AI systems process lots of data from user inputs to transform information and databases. At the heart of this processing are embeddings which are vectors represent that data. 
+
+ Transforming content like search queries, photos, songs or videos into vectors gives machine power to effectivly compare categorize and understand the content in a way that's almost human.
+
+- Think of vector as a coordinate or point in a space. Think of like X-Y axis and cat is translated into a vector e.g cat(4.5, 12.2). This vector encapsulates the meaning and naunces of the word cat in a way an AI model understand and then we word feline(4.7, 12.6) represented by a nearby vector of 4.7 and 12.6. So we will place that on the graph.
+Now words that have similar meaning are numerically similar and tend to be closely positioned in the vector space. 
+So this closeness implies that the cat and feline have the similar meaning. Now let's say we have a word or vectors for kitten(5.1, 12.1) which might be also be close to cat and feline, but may be slightly further apart due to its age related nuance. 
+
+The dog(7.5, 10.5) is different but still in the same general domain of domesticated animals. So the word dog might be represented by a vector that's not too distant, but clearly in a different region. Lets say (7.5, 10.5) and even a phrase like man's best friend(7.6, 10.7), which is colloquial term for a dog could be represented by a vector that's close to the vector for dog. 
+On the other hand the word like building is not related in meaning to any of these so its vector would be much further apart 
+
+Supabase:
+hEscowfnDfP8FRGN
+https://fwosxzoihryeqckruogv.supabase.co
+
+
+# Semantic Search
+Embeddings that are numberically similar or closer together are also sementically similar 
+
+The query that actually finds and ranks embeddings based on their similarity or distance to query embedding.
+PG vector supports operation for calculating distance, the operator used here is called cosine distance. 
+Note that function name should match the table name exactly, here 'document' is table name.
+
+```
+-- Create a function to search for documents
+create or replace function match_documents (
+  query_embedding vector(1536),
+  match_threshold float,
+  match_count int
+)
+returns table (
+  id bigint,
+  content text,
+  similarity float
+)
+language sql stable
+as $$
+  select
+    documents.id,
+    documents.content,
+    1 - (documents.embedding <=> query_embedding) as similarity
+  from documents
+  where 1 - (documents.embedding <=> query_embedding) > match_threshold
+  order by similarity desc
+  limit match_count; 
+$$;
+```
+
