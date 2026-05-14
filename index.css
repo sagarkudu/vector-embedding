@@ -1,0 +1,102 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: "Signika Negative", sans-serif;
+  color: #284b63;
+  text-align: center;
+  font-size: 2.25rem;
+}
+
+body {
+  padding: 20px;
+}
+
+form {
+  border: solid 2px #284b63;
+  display: flex;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+input,
+button {
+  padding: 10px 15px;
+}
+
+input {
+  font-size: 1.15rem;
+  flex: 1;
+  border: none;
+}
+
+button {
+  color: #fff;
+  line-height: 0;
+  background-color: #284b63;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #416e8d;
+}
+
+.icon {
+  font-size: 1.75rem;
+}
+
+.reply {
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.response {
+  background: #f7f7f7;
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 15px;
+  line-height: 1.7;
+}
+
+.response h2,
+.response h3 {
+  margin-top: 0;
+}
+
+.thinking {
+  color: #666;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.error {
+  background: #ffeaea;
+  color: #c62828;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.sources {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.sources h3 {
+  margin-bottom: 12px;
+  color: #284b63;
+}
+
+.source-item {
+  background: #eef3f7;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
