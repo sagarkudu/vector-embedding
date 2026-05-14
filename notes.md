@@ -244,7 +244,6 @@ async function getChatCompletion(text, query) {
 }
 
 we just transformed a simple database search into an engaging and informative conversation. So you can start to imagine the ways you can build AI driven apps that can generate responses taiored to your unique content. This allows users to essentially chat with your content.  
-
 # Creating Text from Documents (Langchain)
 
 1. Convert large document into small pieces of chunks to AI model can effectively capture and understand to give more accurate results.
@@ -268,3 +267,14 @@ async function splitDocument() {
   console.log(text);
 }
 splitDocument();
+
+or 
+import { CharacterTextSplitter } from "@langchain/textsplitters";
+
+const text = "Your long document text here...";
+const splitter = new CharacterTextSplitter({
+  chunkSize: 1024,
+  chunkOverlap: 128,
+});
+
+const chunks = await splitter.splitText(text);Copied!   
